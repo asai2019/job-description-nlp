@@ -1,0 +1,227 @@
+	Work on a cross-functional team and identify solutions that leverage data. 
+	Gather requirements for solutions from business partners and translate into operational models and data science products. 
+	Develop data science solutions utilizing advanced machine learning and statistical techniques (clustering, regression, pattern recognition, NLP, time series analysis etc…). 
+	Create requirements for data science solution that includes data sources and training frequency. 
+	Work with data engineering to develop new data pipelines and promote models to production. 
+	Build test plans of developed models that include unit and integration testing. 
+	Oversee the integration of your solution back into the business process and measure effectiveness and absorption. 
+	Partner with engineering on an as needed basis for systems integration of data science solutions. 
+	Communicate and train non-technical teams on interpreting and actioning data science product results. 
+	Desire to mentor analysts and data scientists across the team in data science concepts. 
+	Designing and analyzing experiments to measure the impact of new product features
+	Investigating high-level questions like “What are the collaborative patterns of the most successful teams using Asana?”
+	Adding new metrics and aggregations to our data warehouse to make new classes of questions answerable
+	Building models to predict the growth trajectory of different customer segments
+	Be(come) an expert on healthcare - and apply that expertise to make the entire system better. 
+	Solve core business problems in systematic and data-driven ways. 
+	Build analytical systems to provide insight into and power all corners of our business, from financial risk and clinical operations to customer service and marketing. 
+	Work with other data team members, product managers and engineers to develop beautiful and data-driven tools to help our members understand and navigate the healthcare system.
+	Solve various problems and make a true impact across unlimited domains and industries (Financial Risk, Health, Ecommerce, Marketing, Oil & Gas Exploration and more.). 
+	Deliver business value by translating complex data into meaningful insights. 
+	Be the face of the company and the product directly interfacing with our partners around the globe. 
+	Partner with our customers’ Data Science teams, helping them optimize their use of SparkBeyond’s Discovery Platform. 
+	Work directly with our in-house team comprised of the brightest minds in technology, research and mathematics as well as senior interfaces from leading companies across the globe (fortune 500 companies and many others).
+	Use your analytical skills and deep product understanding to consult our partners and provide them with advice and input of the highest quality. 
+	Reporting to Engineering manager, you’ll collaborate with Product Managers and Engineers to build innovative ways to leverage data and automate decision-making for our customers. 
+	Explore and analyze the billions of daily data points that customers generate in search of predictive, valuable, actionable signals. 
+	Build, analyze, and iterate on models that are best suited for the job, whether that’s supervised or unsupervised learning, neural networks, or simple regressions
+	Create predictive analytics using the latest machine learning algorithms on relatively “big” data (hundreds of features on > 100 million records)
+	Provide analytic insights for partners throughout the lifecycle of their campaign(s); build, review, and recommend custom models; provide real-time visualizations and analysis of campaign work; and produce post-campaign analytics to help our partners constantly learn from their efforts
+	Design and implement large-scale randomized controlled trials to gauge the general effectiveness of advocacy and campaign efforts
+	Produce post-mortem analytics on the advocacy and campaign work being performed in our platform to help our partners constantly learn from their efforts
+	Conduct various analyses to infer causality from large sets of behavioral data.
+	Work closely with the data engineering team to analyze and augment our data
+	Work closely with our business analysts to draft clear and informative data visualizations
+	Work with our staff and partners to develop practical ways to apply our leading analytics to the real world
+	Help optimize our analytic work to perform well on large datasets stored in Amazon Web Services (AWS)
+	Never stop asking questions and always be hunting for the next impactful insight
+	Apply machine learning and optimization algorithms to maximize the efficiency of our business and minimize risks. 
+	Build, validate, and test predictive models using machine learning techniques to explain or predict behavior and solve a variety of business and engineering problems. 
+	Identify, collect, and explore the right data used for predictive modeling and algorithm development. 
+	Perform and lead developments using machine learning techniques in one or more of the key areas like natural language processing, image recognition, entity recognition, product classification, information retrieval, and recommender system. 
+	Extract and transform data from existing data stores, perform ad-hoc analyses, and report analysis results. 
+	Define and implement processes and procedures on analytical projects to ensure consistency. 
+	Assist managers with finding patterns and relationships in data.
+	Work on challenging fundamental data science problems in online advertising  
+	Propose and develop solutions independently and leading a group of other data scientists 
+	Prepare white papers, scientific publications and conference presentations 
+	Work closely with product and engineering teams to identify and answer important product questions 
+	Communicate findings to product managers and engineers 
+	Drive the collection of new data and the refinement of existing data sources 
+	Analyze and interpret the results 
+	Develop best practices for instrumentation and experimentation and communicate those to product engineering teams
+	You're a dedicated Data Scientist who wants nothing more than to help us sort, analyze and deliver relevant information from terabytes of unstructured data in the social media space. 
+	You will build machine learning models to transform social media feeds into actionable items. 
+	You will also work with engineers, product managers and other teams to solve challenging problems with your data science skills.
+	Work with Product & Engineering teams to identify and prioritize data science opportunities 
+	Build analytical systems that use predictive modeling, recommendation systems, statistical inference, and optimization algorithms to infuse intelligence in products and business workflows 
+	Collaborate with Software Engineers to implement algorithms in production environments 
+	Develop next-generation prediction and optimization algorithms where existing ones either fall short or are inadequate
+	Perform deep analyses into product performance and customer behavior, with an emphasis on machine learning prediction 
+	Manage high-dimensional datasets, including with clustering and dimensionality reduction 
+	Clean and wrangle data from a heterogeneous mix of sources 
+	Create and maintain data pipelines for scalable reporting and productionized models 
+	Clearly convey findings through visualization, written communication, presentations, and/or internal tools 
+	Collaborate cross-functionally to directly impact business metrics, including improving retention and customer lifetime value 
+	Work closely with the head of data science and executives to inform strategic decisions in marketing, operations, and product 
+	Identifying and exploring new datasets that enhance Attune’s understanding of the small business universe and the insurance broker base that serves it 
+	Developing analyses and models that identify insurance needs within small businesses and testing  these hypotheses quickly and efficiently 
+	Analyzing the behavior of brokers and small businesses that interact with our platform and  building strategies to create stickiness and engagement 
+	Creating strategies for outreach to small businesses and insurance brokers leveraging multiple media and touchpoints 
+	Understanding conversion through our acquisitions funnel and what trends and dynamics are impacting its performance (Who is buying what kinds of insurance? Is this changing over time? Why?) 
+	Helping to analyze the value of strategic partnerships and setting up and executing data strategies to grow these partnerships 
+	Ability to participate in systems architecture conversations with a viewpoint on data strategy and future analytical needs 
+	Design and implement statistical tests for new KPIs in our A/B testing framework
+	Mine user interaction data for operational efficiencies and product improvements that could save our customers time and boost our bottom line
+	Deliver a talk to engineers on your favorite Scala features or a class on epistemology to the rest of the business
+	Estimate how adding a hundred thousand tickets to our inventory or changing how we allocate marketing resources will impact revenue
+	Use machine learning to identify when a user has a problem before they contact us
+	Build a model to predict the probability a particular ticket listing will sell at a given price
+	Leverage Phreesia's massive and ever-growing dataset to build data products that provide actionable business insights
+	Propose new Machine Learning models to improve our existing products, as well as devise and build models for new opportunities
+	Navigate and use diverse machine learning stacks in (e.g. Python, R, Keras) and make good decisions about which to use to solve a problem.
+	Use NLP techniques to parse, process and structure textual data
+	Quickly prototype ideas and solve complex problems by adapting creative approaches.
+	Build customized dashboards for internal and external clients.
+	Ensure new projects are tracked properly throughout their life cycle.
+	Write clean, well-tested, code that will stand the test of time.
+	Be an expert communicator: You could summarize your daily progress in a tweet.
+	Prototype ideas, run experiments, and iterate in order to design data driven solutions to business problems.
+	Contribute innovative ideas to enhance or develop products using new or existing data streams.
+	Independently drive the direction of your own projects, reaching out to others within the team and in other teams when needed.
+	Present and promote results to internal stakeholders and external clients and partners.
+	Support and improve existing data science products.
+	Pursue patents where applicable.
+	Contribute to thought leadership in the community with presentations and publications.
+	Dive into video network data to gain actionable insights into how video is being watched on the most popular video player on the web 
+	Research, design and implement algorithms that improve JW Player's products, including video recommendation engines and automated cover art 
+	Develop features that help describe viewers and videos to improve predictive models 
+	Influence the direction of the business by effectively communicating results to cross functional groups 
+	Be responsible for bringing data driven products into production and evaluating, optimizing and supporting them 
+	Provide expertise on machine learning concepts for the broader Data team and inspire the adoption of data science across the entire breadth of our organization 
+	Attend scientific conferences and have opportunities for technical mentorship
+	Adeptly interpret and utilize mass quantities of data to generate innovative hypotheses & insights 
+	Use sophisticated statistical methods to solve problems, leveraging up-to-date academic research and tools 
+	Quantitatively test hypotheses about customer and driver behavior using large sets of proprietary data; leverage results to increase conversion and retention at every touch point 
+	Design and implement novel experiments to better understand current operation as well as expansion to new markets
+	Machine learning and model building for projects involving various teams across the company, including sales, marketing, human resources, finance, and operations 
+	Predictive modeling and segmentation to support prospect scoring and consumer targeting 
+	Data exploration to identify drivers & trends within our business 
+	Ad hoc analysis and reporting as needed
+	Research core business and product questions, using both internal and external data sets 
+	Apply advanced statistical techniques to measure efficacy of various product, marketing, and patient outreach efforts 
+	Communicate insights to business owners 
+	Support data-driven decision making/AB tests (experiment design, analysis, reporting) for execs, business owners, product managers, engineers, etc. 
+	Evangelize data usage and logging (understand data provenance and work to maintain/improve data integrity) 
+	Promote the adoption of best-practices in data processing tools/techniques
+	Drive high-visibility and high-impact projects that drive revenue and help understand content performance.
+	Innovate rapidly to build proofs of concept that can take an idea and prove that it will work across a huge content company.
+	Work closely with stakeholders across the company to move initiatives forward and support data-driven decision-making.
+	You will work closely with our CTO and engineering teams to establish new systems for our products to predict and augment the Stash experience in ever more intelligent ways 
+	Design predictive models which grow and adapt as our products and customer base scale, utilizing machine learning, time-series and Bayesian statistics 
+	Work with large datasets to help us better understand our customers and anticipate their needs through distributed computation techniques 
+	Make rigorous statistical inferences from A/B testing on our product and customer segments 
+	Normalize our data across institutions and sources using semi-supervised learning
+	Understand the business! Work directly with stakeholders to address their needs. 
+	Build models, from selecting features to optimizing. 
+	Be a stakeholder for our models! Help guide and prioritize development of predictive models to enhance our capabilities. 
+	Question our assumptions! Find new and better ways to do what we’re doing. 
+	Produce novel analysis giving insights into the business 
+	Relentlessly analyze and improve the performance of our business.
+	Act as the lead resource for all algorithmic features and functionality across Food52’s website and mobile site 
+	Develop solutions that leverage machine learning and other data science statistical approaches across a wide array of opportunities 
+	Take the above data science approaches from development to production — then support, analyze and iterate 
+	Work closely with product management to understand challenges and propose opportunities that would benefit from data science solutions 
+	Collaborate with engineering to implement A/B tests and drive any needs to augment that analytic infrastructure 
+	Partner across data analytics and engineering to update overall data collection strategy, and support validation of related infrastructure 
+	Ownership of related ETL jobs, migrating data into redshift for analysis, and cleaning / reconciliation of data
+	You will solve highly complex technical challenges that relate to the television advertising industry. 
+	You will be responsible for conducting analysis, building attribution models, forecasting viewing behavior, and presenting complex business problems to a diverse audience. 
+	You will also be expected to design and conduct experiments to solve some of the most fascinating and impactful problems in machine learning and optimization. 
+	You will find yourself working with other data scientists on cutting-edge research to solve industry challenges.  
+	By collecting and using data to make informed decisions, you will help us on our quest to inform advertisers of their efficiency and drive their performance of television media towards their business success metrics.
+	Develops and/or uses advanced algorithms and statistical predictive models and determines analytical approaches and modeling techniques to evaluate scenarios and potential future outcomes
+	Uses strong programming skills to explore, analyze and interpret large volumes of data in various forms, and solve complex business problems
+	Supports deployment of insights across multiple channels, i.e., web, mobile app, email, social, call center, Apple watch
+	Demonstrates strong ability to communicate technical concepts and implications to peers, managers, and business partners
+	Work closely with our product team to understand funnel drop off and come up with product ideas
+	Work closely with the marketing team to optimize our acquisition funnel
+	Present conclusions to the executive team that can impact the strategic direction of the company
+	Build a lead scoring model to help our customer support team prioritize.
+	Model the time-lag of conversions using fun math like Gamma distributions
+	Design an experiment to understand the causal impact of an outbound phone call on conversion rates 
+	Build web scrapers to track price data for other mortgage lenders
+	Migrate our data warehouse to Redshift
+	Work on our underwriting engine, which turns out to be NP-complete and can be posed as a mixed integer programming problem
+	Transcribe all our phone calls using speech-to-text and figure out ways to optimize customer support.
+	Become familiar with our datasets and the analysis tools that we work with
+	Learn about the business and the problems (short-term and long-term) that we face
+	Start to fill holes in our analysis platform and identify the areas of our business that are most important to focus on
+	Deliver your first detailed analysis, which includes a strategic plan for how to act upon your findings
+	Improve the team’s access to advanced analysis tools and begin teaching them how to most effectively use them
+	Increase your knowledge of the business and the teams involved, and prioritize the most impactful projects
+	Establish a roadmap for advanced analysis projects for the next few months
+	Implement your first strategic initiatives and begin measuring the impact on key metrics associated with the initiative
+	Empower the rest of the team to apply advanced analysis to their own projects using your analysis tools
+	Utilizing knowledge of econometrics and time-series modeling to develop department and style-level elasticity and promotion response models to inform business decisions
+	Developing algorithms to help inform and/or optimize decisions around Initial Ticket Price setting, Promotion planning and execution, and Markdown timing and depth
+	Implement formal modeling processes from end to end including data gathering, data profiling, numerical model building, calibration, cross-validation, putting product into production, etc.
+	After building the models, pilot “scorecards” to track model performance and calculated improvement to business – including pre/post time-series analyses, and A/B testing where applicable
+	Explain complex modeling approaches in layman’s terms and discuss modeling results and business case impacts with non-technical business users
+	Collect data from a wide variety of corporate databases, including various SQL databases, no-SQL databases, Access databases, Big Data and Excel files
+	Utilize your toolset in regular expressions to extract information from un-structured text documents
+	Handle missing data through an algorithmic approach such as multiple imputations to enable insights in sparse and messy data.
+	Use your inner whiz-kid to feature engineer the data to boost model accuracy
+	Partner with analysts and live producers to identify strategic business questions, key metrics, and actionable insights. 
+	Provide consumer-ready analysis to Analytics team leadership, live producers, product managers and partner groups. 
+	Assure Rockstar’s ongoing competitive advantage through best-in-class business and game data analysis. 
+	Initiate and carry out analytic experiments aligned with long-term, strategic initiatives. 
+	Combine great data analytics skills with strong business acumen to provide insights that will drive continued success. 
+	Design, develop and deliver machine learning enabled solutions to address critical business or game questions. 
+	Design and build validation tests to assess the efficiency of the model (or algorithm) in place and provide strategic insights to stakeholders. 
+	Conduct proactive in-depth analysis and predictive modeling to uncover hidden opportunities. 
+	Develop mechanisms to objectively measure the performance of initiatives and propose recommendations for improvement. 
+	Develop frameworks, models, tools, and processes to ensure data influences decisions at all levels. 
+	Work within a team of data analysts and engineers. 
+	Reframe objectives as machine learning tasks that can deliver actionable insights, accurate predictions, and effective optimization.
+	Implement and execute machine learning with reliability and reproducibility.
+	Explain how models and systems work to both non-technical and technical stakeholders.
+	Collaborate with engineering teams to build data-based products and help integrate into the products and operational processes.
+	Process, cleanse, and verify the integrity of data used for analysis.
+	Enhance data collection procedures to include information that is relevant for creating better ML models.
+	Create automated anomaly detection systems and constant tracking of its performance.
+	Reframe newsroom and business objectives as machine learning tasks that can deliver actionable insights, accurate predictions, and effective optimization. 
+	Implement and execute machine learning research with reliability and reproducibility. 
+	Communicate results and impact to newsroom and business stakeholders. 
+	Turn models into data products, collaborate with engineering teams, and integrate into process throughout The Times.
+	Own the product, hardware, marketplace, or behavioral analytics side of growing the scooter business 
+	Develop understanding and set business metrics that measure the health of our products, as well as passenger and driver experience 
+	Partner with product managers, engineers, marketers, designers, and operators to translate business insights into decisions and action 
+	Find opportunities for growth and efficiency for Lyft 
+	Design and analyze product experiments; communicate results and launch decisions 
+	Develop analytical frameworks to monitor business and product performance
+	Build dashboards and reports to drive awareness and understanding of metrics and experiment results
+	Use data to inform and influence the direction of team roadmaps and inform business decisions.
+	Work with partner teams to define goals and identify metrics for improving existing features and new releases.
+	Work closely with Data Engineering and IT to author and develop core data sets that empower operational and exploratory analyses.
+	Use quantitative analysis and the presentation of data to see beyond the numbers and understand what drives our business 
+	Provide insights to help business and product leaders understand marketplace dynamics, user behaviors, and long-term trends 
+	Identify and quantify levers to help move key metrics 
+	Recommend which features to build and why 
+	Work backwards from understanding and sizing problems to ideating solutions 
+	Generate recommendations and use statistical techniques and hypothesis testing to validate your findings. 
+	Perform analytical deep-dives to identify problems, opportunities and actions required; 
+	Collecting, processing, and cleaning data from disparate sources using SQL, R, Python, or other scripting and statistical tools; and 
+	Managing the design, execution, and analysis of experiments; driving rigor and testing culture through product and operations teams 
+	Report against company initiatives by identifying key metrics and building executive-facing dashboards to track progress 
+	Monitor key performance metrics, understanding root causes of changes 
+	Build data sets and reporting tables to empower operational and exploratory analysis 
+	Partner with engineering to implement, document, validate, and monitor our logging 
+	Working with internal stakeholders to identify opportunities for leveraging data to drive business solutions. 
+	Mining and analyzing data to drive optimization and product development improvement, marketing practices and business strategy. 
+	Assessing effectiveness and accuracy of new data sources and data gathering methods.
+	Developing custom data models and algorithms. 
+	Using predictive modeling to increase and enhance client experience, revenue generation, ad targeting and other business outcomes. 
+	Developing company A/B testing framework and test model quality. 
+	Coordinating with internal teams to implement models and monitor outcomes.
+	Developing processes and tools to monitor and analyze model performance and data accuracy. 

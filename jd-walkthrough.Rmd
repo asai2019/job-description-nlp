@@ -1,0 +1,325 @@
+---
+title: "jd-walkthrough"
+author: "Aditya Sai"
+date: "March 30, 2019"
+output:
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Motivation
+
+Currently, I have been searching for jobs in data science. In reviewing various job descriptions, I was intrigued by two distinct sections common to every job description:  
+
+1. Responsibilities
+    a. What functions (or duties) are to be performed
+    b. ex. *Design and develop new algorithms to support client activities*
+    c. ex. *Process, integrate and manipulate big data with distributed systems and data pipelines*
+2. Qualifications
+    a. Required (or desired) experience, education, licenses, certifications, skills, etc. 
+    b. ex. *PhD in Statistics, Math, Economics, Machine Learning, AI, Finance, Financial Engineering, related discipline or equivalent experience* 
+    c. ex. *Demonstrated self-starter who thrives in a fast-paced environment*
+
+These are fairly common sections and are indispensable for job applicants in choosing which positions to apply for as well as tailoring their resumes specifically for each position. However, after reviewing a couple of job descriptions, certain words and phrases reappear in each of these components. Some cleverly worded job descriptions may even mix qualifications and functional responsibilities together to create an appealing narrative for prospective candidates. In light of this, I was curious about the word structure of these job descriptions on the basis of these two sections. Namely, I wanted to answer the following questions:
+
+1.  Which terms distinguish responsibilities from qualifications in job descriptions? Are they prevalent in most job descriptions?
+2.  Given an even more condensed representation of job descriptions, like job summaries, what is the semantic structure of  terms? Are there semantically similar terms? How does the prevalence of a term affect its context relative to other terms? 
+
+In order to answer these questions, I made use of natural language processing (NLP) techniques to collect and analyze the terms present in job descriptions for data scientists. This is a write-up of my results. 
+
+***
+
+## (1) Classification of Responsibilities and Qualifications
+
+First, I tackled the challenge of developing a *bag-of-words* classifier to distinguish responsibilities from qualifcations. The *bag-of-words* approach is a popular and simple NLP technique that constructs features based on term frequencies. I made use of these features to train our classifier given a collection of texts, otherwise known as a *corpus*. 
+
+### Load Sample Text Dataset and Assemble Corpus
+I first loaded the *extrafont* library and an additional file with customized functions I created for this task. Then, I started reading lines from two text files containing responsibilities and qualifications of various job descriptions for a data scientist position. These were text files I created by manually extracting statements (identified by the *tm* package in R as documents) from various data scientist job descriptions that correspond to responsibilities or qualifications. In total, I collected a total of 227 documents delineating responsibilities and 303 documents delineating qualifications. 
+
+```{r warning = FALSE, message = FALSE}
+# Load relevant libraries
+library(extrafont)
+# Import relevant functions from associated functions file
+source("jd-functions.R")
+# Specify and load text files 
+filePaths <- c("responsibilities.txt","qualifications.txt")
+text.resp <- readLines(filePaths[1])
+text.qual <- readLines(filePaths[2])
+```
+
+Often, the qualifications section of a job description will list the number of years of experience desired. Since I had this data on hand, I was curious to see how the years of experience were distributed in this sample dataset. 
+
+```{r warning = FALSE, message = FALSE}
+subtitle.qual <- "Based on sample \"qualifications\" corpus."
+plotExperience(text.qual, subtitle.qual)
+```
+
+It seems between 2 and 3 years of experience is sufficient for this sample set of data scientist positions, which is also right-skewed. 
+
+### Create Document-term Matrices and Assemble Overall Dataset
+Given the responsibilities and qualifications corpora, I proceeded to construct the respective document-term matrices. A document-term matrix has documents of the corpus for rows and unique terms for columns. Preprocessing is a necessary first step, and with the aid of the transformation functions present in the *tm* package, I derived the required document-term matrix. 
+```{r warning = FALSE, message = FALSE}
+# Create document-term matrices for responsibilities, 
+# qualifications
+dtm.resp <- preprocessCorpus(text.resp)  
+dtm.qual <- preprocessCorpus(text.qual)
+# Combine respective DTMs into collective matrix
+dtm <- c(dtm.resp,dtm.qual)
+```
+From this combined document-term matrix, I can create an initial dataset from which to train and test our classifier. The instances are the documents, the features are the terms, the matrix entries are the term frequencies in documents, and the output is a label. We classify all documents labeling responsibilities as 1 and 0 otherwise. 
+```{r warning =  FALSE}
+# Create entire dataset of documents and terms as predictors
+dataset <- as.data.frame(as.matrix(dtm))
+# Create a label of responsibilities and qualifications
+dataset$label = matrix(0,nrow(dataset),1)
+# Label all responsibilities as 1, qualifications as 0
+dataset$label[1:dtm.resp$nrow] = 1
+# Convert output variable to categorical factor
+dataset$label = as.factor(dataset$label)
+```
+
+### Additional Visualizations (Word Clouds and Dendrograms)
+Before proceeding to classification, I visualized term frequencies and associations. First, I produced word clouds that depicted the 200 most frequent terms weighted by their frequency:
+
+First, responsibilities:
+```{r warning = FALSE, message = FALSE}
+plotWordcloud(dtm.resp)
+```
+
+Then, for qualifications:
+```{r warning = FALSE, message = FALSE}
+plotWordcloud(dtm.qual)
+```
+
+Finally, a hierarchical clustering dendrogram that clusters terms with similar frequencies together across the entire corpora:
+```{r warning = FALSE, message = FALSE}
+plotDendrogram(dtm)
+```
+
+Some of the terms represent stemmed versions of proper English words (i.e. **experi** instead of **experience**). Term pairs like (**machin**, **learn**) and (**scienc**, **statist**) were fairly close. This is not surprising as phrases such as **machine learning** are bound to populate job descriptions for data scientist positions.  **Data** and **experi** were the most frequent terms in the overall corpus. 
+
+
+### Training and Testing a Random Forest Classifier
+I could now proceed to train the classifier. Despite [advice](http://fastml.com/classifying-text-with-bag-of-words-a-tutorial/) against using random forests for *bag-of-words* models, I used them primarily because they could quantify and visualize feature importances. Quantifying feature importances will enable us to assess those terms that are key to proper classification of documents into responsibilities and qualifications. 
+
+I first split the entire dataset into training and testing sets, based on a 80-20 split.
+```{r warning = FALSE, message = FALSE}
+# Split overall dataset into training and test sets
+library(caTools)
+set.seed(123)
+# Split ratio is 80-20% (Train-Test)
+split = sample.split(dataset$label, SplitRatio = 0.8)
+train = subset(dataset, split == TRUE)
+test = subset(dataset, split == FALSE)
+```
+
+I then fit the random forest classifier to the training set and make predictions on the test set. These predictions can then be compared against the actual test values for accuracy by constructing a confusion matrix. 
+```{r warning = FALSE, message = FALSE}
+# Fitting Random Forest Classifier to the Training set
+# Retain predictor importances
+library(randomForest)
+classifier = randomForest(x = train[-ncol(train)],
+                          y = train$label,
+                          importance = TRUE,
+                          ntree = 500)
+
+# Predict classifier performance on test set results
+y_pred = predict(classifier, newdata = test[-ncol(train)])
+
+# Construct the Confusion Matrix
+library(caret)
+cm = confusionMatrix(y_pred, test$label)
+cm
+```
+
+The classifier performs very well on the test set, achieving a 92% accuracy, 95% precision, and 87% recall. A slightly lower recall value means that fewer documents labeled as responsibilities were predicted as such. Typically, a lower recall value would be problematic for imbalanced datasets, but the class balance is roughly 43%-57% in favor of qualifications, so there is not too much to worry about. Just to confirm the test accuracy value, I performed a k-fold cross validation on the training set to obtain mean validation accuracy and its standard deviation. 
+
+```{r warning = FALSE, message = FALSE}
+# Applying k-Fold Cross Validation to calculate 
+# and confirm mean predictive accuracy over k=10 folds
+folds = createFolds(train$label, k = 10)
+cv = lapply(folds, function(x) {
+  train_fold = train[-x, ]
+  test_fold = train[x, ]
+  classifier = randomForest(x = train_fold[-ncol(train_fold)],
+                            y = train_fold$label,
+                            ntree = 500)
+  y_pred = predict(classifier, newdata = test_fold[-ncol(test_fold)])
+  cm = table(test_fold$label, y_pred)
+  accuracy = (cm[1,1] + cm[2,2]) / (cm[1,1] + cm[2,2] + cm[1,2] + cm[2,1])
+  return(accuracy)
+})
+# Mean cross-validation accuracy
+mean(as.numeric(cv))
+# Standard deviation of cross-validation accuracy
+sd(as.numeric(cv))
+```
+
+The average cross-validation accuracy and its standard deviation indicate a reasonably accurate and reliable classifier that performs consistently across all 10 folds. The cross-validation accuracy (90%) is just slightly below the test accuracy (92%). 
+
+### Feature Importances of Random Forest Classifier
+With a fully trained, accurate random forest classifier, I analyzed the features important to classification. Random forests determine the importance of a feature by calculating the change in performance when a particular feature is permuted or emphasized. The performance metrics we observed were the mean decrease in accuracy and the mean decrease in Gini impurity. I also listed the 10 most frequent terms in each corpus for comparison.  
+
+```{r warning = FALSE, message = FALSE, fig.height=7, fig.width=9}
+# Produce variable importance plot
+# Identifies important words that affects the accuracy of the model.
+varImp = importance(classifier)
+plotImportance(varImp)
+
+# Find most frequent terms in responsibilities and qualifications text files
+# Most frequent terms in responsibilities
+findMostFreqTerms(dtm.resp, n = 10L, INDEX = rep(1, dtm.resp$nrow))
+# Most frequent terms in qualifications
+findMostFreqTerms(dtm.qual, n = 10L, INDEX = rep(1, dtm.qual$nrow))
+```
+
+The terms **experi** and **abil** are the most important terms according to both metrics. These terms are prevalent in the qualifcations corpus, and not in the responsibilities corpus, so it would make sense to separate the two classes on the basis of these terms. **Experience** and **ability** are best embedded as descriptors for the qualifications in a job description, and in this case, they seem to impact classification the most. Other terms of interest include **team**, **implement**, and **python**. The term **data** is not particularly useful as both corpora contained the term frequently.  
+
+***
+
+## (2) Word Vectorization of Job Summaries
+
+Next, I focused on a different analysis of data scientist job descriptions. I compiled this dataset dynamically by web scraping job portals. Specifically, I picked [Indeed](www.indeed.com) as it was structured in a relatively straightforward fashion and did not require searching through too many html tags for the target information. However, the entire body of the job description would be too unwieldy and complicated to extract position specifics I would usually consider, so I focused on the short, concise job summaries that introduced the position by engaging the prospective candidates' attention, with the help of the *rvest* package: 
+
+![](indeed_summary.png)
+
+### Scrape and Construct Job Summary Corpus
+
+I stored the information scraped from Indeed into a data frame. I also plotted the years of experience for the numeric values in the scraped job summaries for some comparison to the presampled qualifications corpus. Finally, I transformed the corpus by removing stopwords, punctuation, and numbers, and converted it to lowercase. 
+
+```{r message = FALSE, warning = FALSE}
+# Give option to load pre-existing dataset or scrape new data
+have.data = TRUE
+if(have.data){
+  # Read in prescraped dataset
+  df <- read.csv("summaries.csv")
+}else{
+  # Obtain dataset from web scraping
+  df <- scrapeSummary()
+  # Write scraped dataframe to .csv file (in case)
+  write.csv(df, file = "summaries.csv")
+}
+# Visualize years of experience gleaned from job summaries
+subtitle.summary <- "Based on the Indeed job summary corpus"
+plotExperience(unlist(df), subtitle.summary)
+# Perform necessary operations to preprocess job summaries
+library(tm)
+df$Description = tolower(df$Description)
+df$Description = removeWords(df$Description, stopwords("english"))
+df$Description = removePunctuation(df$Description)
+df$Description = removeNumbers(df$Description)
+```
+
+Slightly more years of experience appear to be required according to the Indeed job summaries compared to the previous corpora, but the distribution appears Gaussian. 
+
+### Vectorization of Job Summary Corpus using GloVe Algorithm
+The *bag-of-words* approach is a quick and dirty scheme to capture the terms available in a corpus. However, it does not capture the *semantics* of a text, and its meaning in the appropriate context. For that, we have to refer to vectorization or embedding algorithms like *text2vec*. Another alternative is [GloVe](https://nlp.stanford.edu/projects/glove/), an unsupervised NLP algorithm meant to produce embeddings of terms onto a vector space that reflects the cooccurrence statistics of all terms within the corpus. GloVe is a count-based, global bilinear log-regression model that combines global matrix factorization with local context windows. The compressed representation model explicitly considers ratios of coccurrence proabilities rather than the probabilities themselves. 
+
+I applied the GloVe algorithm, as implemented by the *text2vec* package, to the job summary corpus, examining both unigrams (single terms) and bigrams (pair of consecutive terms). A vocabulary was formed and pruned to remove low-frequency terms. A transaction cooccurrence matrix is formed by counting cooccurrences within context windows of 10 terms. This matrix was then fed as input into the embedding model, with training limited to 100 iterations. The dimensionality of the word vectors was set to 50 and the saturating value for the cooccurrence weighting function was set to 50. Two separate sets of word vectors were produced, representing the main and context terms, respectively. Since both mappings are equally informative in explaining the transformation, I chose to combine them into a single set of word vectors. 
+
+```{r warning = FALSE, message = FALSE}
+library(text2vec)
+# Collect all unique terms from document to form vocabulary
+iter = itoken(df$Description, preprocessor = tolower,
+            tokenizer = word_tokenizer)
+# Look at uni- and bigrams
+vocab <- create_vocabulary(iter, ngram = c(1L, 2L))
+# Prune vocabulary to retain words whose frequencies greater than 10
+vocab <- prune_vocabulary(vocab, term_count_min = 10,
+                          doc_proportion_min = 0.001)
+# Use our filtered vocabulary
+vectorizer <- vocab_vectorizer(vocab)
+# Use window size of 10 for context words (captures most document lengths)
+tcm <- create_tcm(iter, vectorizer, skip_grams_window = 10L)
+set.seed(123)
+# Initialize and train GloVe embeddings model
+glove <- GlobalVectors$new(word_vectors_size = 100, vocabulary = vocab, x_max = 50)
+wv_main <- glove$fit_transform(tcm, n_iter = 100, verbose = FALSE)
+wv_context <- glove$components
+# Combine both main and context vectors
+wv <- t(wv_main) + wv_context
+```
+
+I then sought to analyze these word vectors by computing cosine similarity measures. The cosine similarity measures the angle between two vectors, with a value of 1 indicating complete agreement and similarity, and a value of -1 indicating complete disagreement/dissimilarity. Values around 0 indicate no discernible pattern. 
+
+```{r warning = FALSE, message = FALSE, fig.width = 10}
+plotSimilarTerms("data_science","machine_learning",wv)
+```
+
+**Data science** figures to be a very prominent term in this corpus and has been found to be most similar to its component terms and other bigrams including the term **science**. **Machine learning** was also most similar to its component terms.
+
+```{r warning = FALSE, message = FALSE, fig.width = 9}
+plotSimilarTerms("degree","experience",wv)
+```
+
+**Years experience** is important to both terms. **Degree** is compared to disciplines and topics in which a degree can be completed. **Experience** is also a significant term that can be easily placed in context of other words. 
+
+```{r warning = FALSE, message = FALSE, fig.width = 9}
+plotSimilarTerms("python","r",wv)
+```
+
+Both terms are most similar to each other and reference other programming languages. 
+
+### Multidimensional Scaling (MDS) of GloVe Word Vectors
+
+Visualizing 100-dimensional word vectors is intractable, so I projected these vectors onto a 2-dimensional space with multidimensional scaling (MDS). MDS is a dimensionality reduction technique that seeks to preserve the distance or dissimilarity between vectors. Since vector distances within GloVe encode some semantic meaning, I felt this projection would be ideal to preserve the relative term topology. Besides labeling each vector with its corresponding term, I also colored the label proportional to the logarithm of its frequency within the corpus. To determine the effects of different dissimilarity metrics, I first applied MDS to the Euclidean distances between these word vectors.  
+
+```{r warning = FALSE, message = FALSE, fig.height = 10, fig.width = 15}
+# (A) Euclidean distance
+set.seed(123)
+vectordata = dist(scale(t(wv)))
+mds.euc <- data.frame(cmdscale(vectordata))
+
+# Label each point with corresponding word and color according to frequency
+words <- colnames(wv)
+LogFrequency <- log10(vocab$term_count)
+
+plotGloveMDS(mds.euc,words,LogFrequency,"Euclidean Distance")
+```
+
+I expected terms close to each other in this reduced vector space to be semantically similar, meaning they are commonly found within the same context and are transposable within the corpus. There are some clear and evident trends from this figure:
+
+1.  The terms seem to be stratified primarily by frequency. Higher frequency terms are more separated and isolated. Low frequency terms tend to aggregate around each other, basically overlaping each other. This may be the case of information loss due to projection error whereby insufficient cooccurrence statistics fail to differentiate these terms significantly. Adding more documents to the corpora may help alleviate this to properly contextualize these low frequency terms.  
+
+2.  There appear to be clear regions where certain topics or subjects tend to predominate. For example, the top region focuses on NLP, the left region contains terms related to subject matter and clients, and the bottom region on data scientists. 
+
+3.  **Data** seems to isolate itself from the other terms. It seems to hold greater weight in the entire corpus, also highlighted by its frequency. **Data scientist** and **data science** seem equidistant from this term but are also close to their analogues, minus the **data** term. 
+
+4.  **Scientist** and **data scientist** seem perfectly in parallel with their plural forms, which suggests analogies are preserved under MDS: **scientist** is to **data scientist** as **scientists** is to **data scientists**. This approximately corresponds to the vector differences captured in the equation: **data scientist** - **scientist** + **scientists** = **data scientists**. The same also applies to the terms **science** and **data science**. 
+
+5.  **Machine learning** is also isolated in another area with its constituent terms, suggesting they are relatively interchangeable in the corpus, but semantically distinct from the rest of the corpus. 
+
+6. Other term pairs also suggest semantic similarity. For example, 
+      + (**join**, **work**), 
+      + (**natural language**, **language**), 
+      + (**knowledge**, **tools**), 
+      + (**science**, **analytics**), 
+      + (**clients**, **strategic**), 
+      + (**experts**, **decision**), 
+      + (**solutions**, **engineering**)
+
+When cosine distance is used: 
+
+```{r warning = FALSE, message = FALSE, fig.height = 10, fig.width = 15}
+# (B) Cosine Distance
+set.seed(123)
+cosdata = 1-sim2(t(wv),t(wv),method='cosine',norm='l2')
+mds.cos <- data.frame(cmdscale(cosdata))
+
+plotGloveMDS(mds.cos,words,LogFrequency,"Cosine Distance")
+```
+
+***
+
+## Takeaways
+
+> **Experience** and **ability** are the top terms for discriminating between the responsibilities and qualifications sections in job descriptions.    
+
+In the scope of this exercise, I observed that these two terms, found in the qualifications corpus, improved the classification power of the random forests. I could look into alternative classifiers (e.g., logistic regression, SVM, Naive Bayes) and track their performance relative to the ensemble classifier presented here. I could also expand the size of the corpus by incorporating vastly more documents that are reflective of a diverse vocabulary that encompasses the range of possible data scientist positions. As these terms are fairly common in all job descriptions, it would make sense for prospective applicants to emphasize their experience and abilities towards a particular position.  
+
+> Semantic distinction is a function of term frequency. 
+
+NLP embeddings like GloVe provide a distributed word representation model that learns context iteratively. Terms that are synonymous with each other within corpora can be easily identified and targeted for further analysis. GloVe trains relatively fast on small corpora like the ones presented here, so I could scale the algorithm to larger corpora that takes advantage of more nuanced job descriptions. MDS can reveal groupings of words into broader subject areas that highlight the inherent disparities of word embeddings. I would look to expand this analysis to peripherally related jobs, like data analyst and data engineer. Possible extensions include topic modeling, document summarization, and possibly, resume matching with prospective job descriptions.  
