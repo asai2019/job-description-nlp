@@ -58,6 +58,30 @@ classifier = randomForest(x = train[-ncol(train)],
 # Predict classifier performance on test set results
 y_pred = predict(classifier, newdata = test[-ncol(train)])
 
+# ADDITIONAL (4/21/19): Fitting Logistic Regression Classifier to the Training set
+# Fitting Logistic Regression to the Training set
+classifier = glm(formula = label ~ .,
+                 family = binomial,
+                 data = train)
+
+# Predict classifier performance on test set results
+prob_pred = predict(classifier, type = 'response', newdata = test[-ncol(train)])
+y_pred = as.factor(ifelse(prob_pred > 0.5, 1, 0))
+
+
+# ADDITIONAL (4/21/19): Fitting xgboost classifier to the Training set
+# Fitting xgboost to the Training set
+library(xgboost)
+classifier = xgboost(data = as.matrix(train[-ncol(train)]), 
+                     label = as.numeric(train$label)-1,
+                     objective = "binary:logistic",
+                     nrounds = 100)
+
+# Predicting classifier performance on test set results
+y_pred = predict(classifier, newdata = as.matrix(test[-ncol(train)]))
+y_pred = as.factor(as.integer(y_pred >= 0.5))
+
+
 # Construct the Confusion Matrix
 library(caret)
 cm = confusionMatrix(y_pred, test$label)
